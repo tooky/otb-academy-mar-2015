@@ -1,4 +1,4 @@
-# On The Beach Academy - October, 2014
+# On The Beach Academy
 
 ## Dependencies
 
@@ -10,13 +10,13 @@
 Clone this repository:
 
 ```bash
-$ git clone https://github.com/tooky/otb-academy-oct-2014.git
+$ git clone https://github.com/tooky/<reponame>.git
 ```
 
 Change directories so that you're in the project:
 
 ```bash
-$ cd otb-academy-oct-2014
+$ cd <reponame>
 ```
 
 ## Exercises
@@ -100,7 +100,7 @@ You will find you are back at clean directory, where you last committed.
 Make a branch to keep all your changes:
 
 ```bash
-git checkout my-working-branch
+git branch my-working-branch
 ```
 
 Make sure you've got the latest version from GitHub
