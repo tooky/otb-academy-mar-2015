@@ -79,6 +79,6 @@ RSpec.describe "A symbol in Ruby" do
   end
 
   it "can be created dynamically" do
-    expect( ("hello" + "world") ).to eq( __ )
+    expect( ("hello" + "world").to_sym ).to eq( __ )
   end
 end
