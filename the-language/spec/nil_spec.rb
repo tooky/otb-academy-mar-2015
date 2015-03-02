@@ -21,7 +21,7 @@ RSpec.describe "nil in Ruby" do
 
   it "has a few methods defined on it" do
     expect( nil.nil? ).to eq(__)
-    expect( nil.to_s? ).to eq(__)
+    expect( nil.to_s ).to eq(__)
     expect( nil.inspect ).to eq(__)
   end
 
