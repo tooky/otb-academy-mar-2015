@@ -16,7 +16,7 @@ $ git clone https://github.com/tooky/otb-academy-mar-2015.git
 Change directories so that you're in the project:
 
 ```bash
-$ cd <reponame>
+$ cd otb-academy-mar-2015.git
 ```
 
 ## Exercises
