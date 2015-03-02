@@ -10,7 +10,7 @@
 Clone this repository:
 
 ```bash
-$ git clone https://github.com/tooky/<reponame>.git
+$ git clone https://github.com/tooky/otb-academy-mar-2015.git
 ```
 
 Change directories so that you're in the project:
