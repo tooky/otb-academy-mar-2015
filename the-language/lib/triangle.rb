@@ -15,9 +15,17 @@
 #
 def triangle(a, b, c)
   # WRITE THIS CODE
-  if a == b && b == c then
+  #if a == b && b == c then
+  #  :equilateral
+  #elsif a == b || b == c || c == a then
+  #  :isosceles
+  #else
+  #  :scalene
+  #end
+  newset = Set.new [a, b, c]
+  if newset.count == 1 then
     :equilateral
-  elsif a == b || b == c || c == a then
+  elsif newset.count == 2 then
     :isosceles
   else
     :scalene
