@@ -28,7 +28,7 @@ RSpec.describe "methods in ruby" do
   end
 
   it "is not possible to call methods with the wrong number of arguments" do
-    #expect { a_global_method }.to raise_error( __, /__/ ) # HINT: Fill in the error and part of the message
+    expect { a_global_method }.to raise_error( __, /__/ ) # HINT: Fill in the error and part of the message
 
     expect { a_global_method(1,2,3) }.to raise_error( __, /__/ ) # HINT: Fill in the error and part of the message
   end
