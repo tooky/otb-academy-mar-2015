@@ -16,12 +16,17 @@ rescue FailedAssertion
 end
 
 class WasRun
-  attr_reader :was_run
+  attr_reader :was_run, :was_setup
   def initialize(name)
     @name = name
   end
 
+  def setup
+    @was_setup = true
+  end
+
   def run
+    setup
     public_send(@name)
   end
 
@@ -30,8 +35,15 @@ class WasRun
   end
 end
 
+# a test method is invoked
 test = WasRun.new("test_method")
 test.run
 assert test.was_run
+
+# the setup method is invoked
+test = WasRun.new("test_method")
+test.run
+assert test.was_setup
+
 
 puts "Success!"
