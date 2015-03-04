@@ -30,7 +30,7 @@ class TestCase
 end
 
 class WasRun < TestCase
-  attr_reader :was_run, :was_setup
+  attr_reader :was_run, :was_setup, :was_torn_down
 
   def setup
     @was_setup = true
@@ -39,21 +39,23 @@ class WasRun < TestCase
   def test_method
     @was_run = true
   end
+
+  def tear_down
+    @tear_down = true
+  end
 end
 
 class RunningTests < TestCase
-  def test_a_test_method_is_invoked
-    # a test method is invoked
+  def test_run_template_method
     test = WasRun.new("test_method")
     test.run
-    assert test.was_run
+    assert [:setup, :test_method, :tear_down] == test.log
   end
 
-  def test_setup_method_is_invoked
-    # the setup method is invoked
+  def test_result
     test = WasRun.new("test_method")
-    test.run
-    assert test.was_setup
+    result = test.run
+    assert "1 run, 0 failed" == result.summary
   end
 end
 
