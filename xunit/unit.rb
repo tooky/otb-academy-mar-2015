@@ -15,19 +15,25 @@ rescue FailedAssertion
   raise 'assertion failed that should not have'
 end
 
-class WasRun
-  attr_reader :was_run, :was_setup
+class TestCase
   def initialize(name)
     @name = name
   end
 
   def setup
-    @was_setup = true
   end
 
   def run
     setup
     public_send(@name)
+  end
+end
+
+class WasRun < TestCase
+  attr_reader :was_run, :was_setup
+
+  def setup
+    @was_setup = true
   end
 
   def test_method
@@ -35,15 +41,23 @@ class WasRun
   end
 end
 
-# a test method is invoked
-test = WasRun.new("test_method")
-test.run
-assert test.was_run
+class RunningTests < TestCase
+  def test_a_test_method_is_invoked
+    # a test method is invoked
+    test = WasRun.new("test_method")
+    test.run
+    assert test.was_run
+  end
 
-# the setup method is invoked
-test = WasRun.new("test_method")
-test.run
-assert test.was_setup
+  def test_setup_method_is_invoked
+    # the setup method is invoked
+    test = WasRun.new("test_method")
+    test.run
+    assert test.was_setup
+  end
+end
 
+RunningTests.new("test_a_test_method_is_invoked").run
+RunningTests.new("test_setup_method_is_invoked").run
 
 puts "Success!"
