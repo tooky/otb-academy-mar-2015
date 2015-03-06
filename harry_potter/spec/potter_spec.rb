@@ -106,6 +106,11 @@ RSpec.describe "A purchase of Harry Potter Books" do
       # Kata example
       # [1,2,3,4,5] = 5 * 8 = 40 * 0.75 = 30
       # [1,2,3]     = 3 * 8 = 24 * 0.9  = 21.6
+      # Wrong
+      #
+      # 2 x set of 4 is cheaper
+      # [1,2,3,4] = 4 * 8 = 32 * 0.8 = 25.6
+      # [1,2,3,5] = 4 * 8 = 32 * 0.8 = 25.6
       expect(basket.total).to eq(51.20)
     end
 
