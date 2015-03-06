@@ -1,19 +1,28 @@
 class Basket
   BASE_PRICE = 8
-  DISCOUNT = { 1 => 1,
-               2 => 0.95,
-               3 => 0.9,
-               4 => 0.8,
-               5 => 0.75 }
 
   def initialize(books)
-    @books = generate_sets(books)
+    @books = GenerateSet.new(books).set
   end
 
   def total
     @books.reduce(0) do |total, set|
-      total += (set.size * BASE_PRICE) * DISCOUNT[set.size]
+      total += (set.size * BASE_PRICE) * discount_value[set.size]
     end
+  end
+
+  def discount_value
+    { 1 => 1,
+      2 => 0.95,
+      3 => 0.9,
+      4 => 0.8,
+      5 => 0.75 }
+  end
+end
+
+class GenerateSet
+  def initialize(books)
+    @books =  optimised_sets(books)
   end
 
   def generate_sets(books)
@@ -27,8 +36,18 @@ class Basket
 
     return sets
   end
-end
 
+  def optimised_sets(books)
+    # If we have any sets of 3 AND there is a set of 5
+    # refactor set to reduce the 5 to 4 and 3 to 5
+    # There should never be a 3 and 5 together in a set
+    return generate_sets(books)
+  end
+
+  def set
+    @books
+  end
+end
 
 RSpec.describe "A purchase of Harry Potter Books" do
   context "Basket" do
