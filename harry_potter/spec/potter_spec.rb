@@ -1,7 +1,7 @@
 class Basket
   BASE_PRICE = 8
   DISCOUNT = { 1 => 1,
-               2 => 0.96,
+               2 => 0.95,
                3 => 0.9,
                4 => 0.8,
                5 => 0.75 }
