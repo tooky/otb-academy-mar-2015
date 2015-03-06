@@ -1,3 +1,35 @@
+class Basket
+  BASE_PRICE = 8
+  DISCOUNT = { 1 => 1,
+               2 => 0.96,
+               3 => 0.9,
+               4 => 0.8,
+               5 => 0.75 }
+
+  def initialize(books)
+    @books = generate_sets(books)
+  end
+
+  def total
+    @books.reduce(0) do |total, set|
+      total += (set.size * BASE_PRICE) * DISCOUNT[set.size]
+    end
+  end
+
+  def generate_sets(books)
+    sets = []
+
+    while books.size > 0
+      set = books.uniq
+      sets << set
+      set.each { |si| books.delete_at(books.index(si)) }
+    end
+
+    return sets
+  end
+end
+
+
 RSpec.describe "A purchase of Harry Potter Books" do
   context "Basket" do
     it "contains 1 unique book" do
@@ -23,7 +55,7 @@ RSpec.describe "A purchase of Harry Potter Books" do
       basket =  Basket.new(books)
 
       #
-      # [2,2,2,2,2] = 5 * 8 =
+      # [2,2,2,2,2] = 5 * 8 = 40
       expect(basket.total).to eq(40)
     end
 
@@ -52,8 +84,29 @@ RSpec.describe "A purchase of Harry Potter Books" do
 
       #
       # [1,2,3,4,5] = 5 * 8 = 40 * 0.75 = 30
-      # [1,4] = 2 * 8 = 16 * 0.95 = 15.2
+      # [1,4]       = 2 * 8 = 16 * 0.95 = 15.2
       expect(basket.total).to eq(45.2)
+    end
+
+    it "contains set of 3 and 1 single" do
+      books = [5,4,3,4]
+      basket =  Basket.new(books)
+
+      #
+      # [3,4,5] = 3 * 8 = 24 * 0.9 = 21.6
+      # [4]     = 1 * 8 = 8 * 1    = 8
+      expect(basket.total).to eq(29.6)
+    end
+
+    it "3 partial sets and 2 singles" do
+      books = [1,1,2,2,3,3,4,5]
+      basket =  Basket.new(books)
+
+      #
+      # Kata example
+      # [1,2,3,4,5] = 5 * 8 = 40 * 0.75 = 30
+      # [1,2,3]     = 3 * 8 = 24 * 0.9  = 21.6
+      expect(basket.total).to eq(51.20)
     end
 
   end
