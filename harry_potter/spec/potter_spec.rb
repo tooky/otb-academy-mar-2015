@@ -2,7 +2,7 @@ class Basket
   BASE_PRICE = 8
 
   def initialize(books)
-    @books = GenerateSet.new(books).set
+    @books = OptimiseBasket.new(books).basket
   end
 
   def total
@@ -10,6 +10,8 @@ class Basket
       total += (set.size * BASE_PRICE) * discount_value[set.size]
     end
   end
+  
+  private 
 
   def discount_value
     { 1 => 1,
@@ -20,33 +22,51 @@ class Basket
   end
 end
 
-class GenerateSet
-  def initialize(books)
-    @books =  optimised_sets(books)
+class OptimiseBasket
+  attr_reader :basket
+
+  def initialize(basket)
+    @basket =  optimise(basket)
   end
 
-  def generate_sets(books)
+  def optimise(basket)
+    @optimised = generate_sets(basket)
+
+    while set_should_be_optimised?
+      @optimised[get_index(5)].pop
+      @optimised[get_index(3)].push(5)      
+    end
+
+    return @optimised
+  end
+
+  def generate_sets(basket)
     sets = []
 
-    while books.size > 0
-      set = books.uniq
+    while basket.size > 0
+      set = basket.uniq
       sets << set
-      set.each { |si| books.delete_at(books.index(si)) }
+      set.each { |si| basket.delete_at(basket.index(si)) }
     end
 
     return sets
   end
 
-  def optimised_sets(books)
-    # If we have any sets of 3 AND there is a set of 5
-    # refactor set to reduce the 5 to 4 and 3 to 5
-    # There should never be a 3 and 5 together in a set
-    return generate_sets(books)
+  def set_should_be_optimised?
+    set_sizes.has_value?(3) && set_sizes.has_value?(5)
   end
 
-  def set
-    @books
+  def set_sizes
+    @optimised.each.with_index.inject({}) do |hash,(v,i)| 
+      hash[i] = v.size
+      hash
+    end
   end
+
+  def get_index(value)
+    set_sizes.rassoc(value).slice(0,1).first
+  end
+
 end
 
 RSpec.describe "A purchase of Harry Potter Books" do
