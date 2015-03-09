@@ -59,7 +59,7 @@ class RunningTests < TestCase
   end
 end
 
-RunningTests.new("test_a_test_method_is_invoked").run
-RunningTests.new("test_setup_method_is_invoked").run
+RunningTests.new("test_run_template_method").run
+RunningTests.new("test_result").run
 
 puts "Success!"
