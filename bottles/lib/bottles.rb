@@ -1,15 +1,44 @@
 class Bottles
 
   def verse(number_of_bottles)
-    case number_of_bottles
-    when 2 then
-      "#{number_of_bottles} bottles of beer on the wall, #{number_of_bottles} bottles of beer.\nTake one down and pass it around, #{number_of_bottles - 1} bottle of beer on the wall.\n"
-    when 1
-      "#{number_of_bottles} bottle of beer on the wall, #{number_of_bottles} bottle of beer.\nTake it down and pass it around, no more bottles of beer on the wall.\n"
-    when 0
-      "No more bottles of beer on the wall, no more bottles of beer.\nGo to the store and buy some more, 99 bottles of beer on the wall.\n"
+    bottles_left = number_of_bottles - 1
+    "#{count_bottles(number_of_bottles).capitalize} #{container(number_of_bottles)} of beer on the wall, "\
+      "#{count_bottles(number_of_bottles)} #{container(number_of_bottles)} of beer.\n"\
+      "#{action(number_of_bottles)}"\
+      "#{count_bottles(bottles_left)} #{container(bottles_left)} of beer on the wall.\n"
+  end
+
+  def action(number_of_bottles)
+    if number_of_bottles.zero?
+      "Go to the store and buy some more, "
     else
-      "#{number_of_bottles} bottles of beer on the wall, #{number_of_bottles} bottles of beer.\nTake one down and pass it around, #{number_of_bottles - 1} bottles of beer on the wall.\n"
+      "Take #{pronoun(number_of_bottles)} down and pass it around, "
+    end
+  end
+
+  def pronoun(number_of_bottles)
+    if number_of_bottles == 1
+      "it"
+    else
+      "one"
+    end
+  end
+
+  def count_bottles(number_of_bottles)
+    if number_of_bottles == 0
+      "no more"
+    elsif number_of_bottles == -1
+      "99"
+    else
+      number_of_bottles.to_s
+    end
+  end
+
+  def container(number_of_bottles)
+    if number_of_bottles == 1
+      "bottle"
+    else
+      "bottles"
     end
   end
 
