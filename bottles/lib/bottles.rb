@@ -1,45 +1,67 @@
-class Bottles
-
-  def verse(number_of_bottles)
-    bottles_left = number_of_bottles - 1
-    "#{count_bottles(number_of_bottles).capitalize} #{container(number_of_bottles)} of beer on the wall, "\
-      "#{count_bottles(number_of_bottles)} #{container(number_of_bottles)} of beer.\n"\
-      "#{action(number_of_bottles)}"\
-      "#{count_bottles(bottles_left)} #{container(bottles_left)} of beer on the wall.\n"
+class BottleNumber
+  
+  def initialize(number_of_bottles)
+    @number_of_bottles = number_of_bottles
   end
-
-  def action(number_of_bottles)
-    if number_of_bottles.zero?
-      "Go to the store and buy some more, "
-    else
-      "Take #{pronoun(number_of_bottles)} down and pass it around, "
-    end
-  end
-
-  def pronoun(number_of_bottles)
-    if number_of_bottles == 1
+  
+  def pronoun
+    if @number_of_bottles == 1
       "it"
     else
       "one"
     end
   end
-
-  def count_bottles(number_of_bottles)
-    if number_of_bottles == 0
+  
+  def count_bottles
+    if @number_of_bottles == 0
       "no more"
-    elsif number_of_bottles == -1
-      "99"
     else
-      number_of_bottles.to_s
+      bottle_left_number
     end
   end
-
-  def container(number_of_bottles)
-    if number_of_bottles == 1
+  
+  def bottle_left_number
+    if @number_of_bottles == -1
+      99
+    else
+      @number_of_bottles.to_s
+    end
+  end
+  
+  def container
+    if @number_of_bottles == 1
       "bottle"
     else
       "bottles"
     end
+  end
+  
+  def action
+    if @number_of_bottles.zero?
+      "Go to the store and buy some more, "
+    else
+      "Take #{pronoun} down and pass it around, "
+    end
+  end
+  
+  def bottles_left_count
+    BottleNumber.new(@number_of_bottles - 1).count_bottles
+  end
+  
+  def bottles_left_container
+    BottleNumber.new(@number_of_bottles - 1).container
+  end
+  
+end
+
+class Bottles
+
+  def verse(number_of_bottles)
+    bottle_number = BottleNumber.new(number_of_bottles)
+    "#{bottle_number.count_bottles.capitalize} #{bottle_number.container} of beer on the wall, "\
+    "#{bottle_number.count_bottles} #{bottle_number.container} of beer.\n"\
+    "#{bottle_number.action}"\
+    "#{bottle_number.bottles_left_count} #{bottle_number.bottles_left_container} of beer on the wall.\n"
   end
 
   def verses(high, low )
