@@ -12,7 +12,7 @@ class Hangman
 		if @hidden_word.include?(guess)
 			@word = 'p___'
 		else
-			@lives = 9
+			@lives -= 1
 		end
 	end
 
@@ -63,6 +63,24 @@ RSpec.describe 'Hangman' do
 
 		it 'should show the correct guess' do
 			expect(hangman.word).to eq('p___')
+		end
+
+	end
+
+	context 'when player makes 10 invalid guesses' do
+		
+		before do 
+			("a".."j").each do |guess|
+  			hangman.make_guess(guess)
+			end
+		end
+
+		it "should return 0 lives" do
+			expect(hangman.lives).to eq(0)
+		end
+
+		it "should not change word state" do
+			expect(hangman.word).to eq('____')
 		end
 
 	end
