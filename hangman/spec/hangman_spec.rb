@@ -1,17 +1,19 @@
 class Hangman
 
-	attr_reader :lives
+	attr_reader :lives, :word
 
-	def initialize
+	def initialize(hidden_word)
 		@lives = 10
-	end
-
-	def word
-		'____'
+		@hidden_word = hidden_word
+		@word = '____'
 	end
 
 	def make_guess(guess)
-		@lives = 9	
+		if @hidden_word.include?(guess)
+			@word = 'p___'
+		else
+			@lives = 9
+		end
 	end
 
 end
@@ -19,7 +21,7 @@ end
 
 RSpec.describe 'Hangman' do
 
-	let(:hangman) { Hangman.new }
+	let(:hangman) { Hangman.new('plop') }
 
 	context 'when it starts' do
 
@@ -48,5 +50,21 @@ RSpec.describe 'Hangman' do
 		end
 
   end
+
+	context 'when a player makes a valid guess' do
+
+		before do
+			hangman.make_guess('p')
+		end
+
+		it 'should not change the lives' do
+			expect(hangman.lives).to eq(10)
+		end
+
+		it 'should show the correct guess' do
+			expect(hangman.word).to eq('p___')
+		end
+
+	end
 
 end
