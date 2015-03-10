@@ -24,4 +24,16 @@ class Hangman
 		end.join
 	end
 
+	def game_state
+		if game_over && !lives.zero? 
+			"Won"
+		elsif game_over && lives.zero?
+			"Lost"
+		end
+	end
+
+	def game_over
+		lives.zero? || !word.include?('_')
+	end
+
 end

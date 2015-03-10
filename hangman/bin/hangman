@@ -7,12 +7,15 @@ hidden_word = STDIN.gets.chomp
 
 hangman = Hangman.new(hidden_word)
 
-while(hangman.lives > 0)
+until hangman.game_over
 
 	print 'Enter guess: '
 	guess = STDIN.gets.chomp
 	hangman.make_guess(guess)
+
 	puts hangman.word
 	puts "Lives remaining: #{hangman.lives}"
 
 end
+
+puts hangman.game_state

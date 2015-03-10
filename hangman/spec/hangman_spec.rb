@@ -80,6 +80,11 @@ RSpec.describe 'Hangman' do
 			expect(hangman.word).to eq('____')
 		end
 
+		it "should say the player lose" do
+			expect(hangman.game_state).to eq('Lost')
+			expect(hangman.game_over).to eq(true)
+		end
+
 	end
 
 	context 'when a player guesses "plop"' do
@@ -98,6 +103,13 @@ RSpec.describe 'Hangman' do
 		it 'should show whole word' do
 			expect(hangman.word).to eq('plop')
 		end
+
+		it 'should say the player has won' do
+			expect(hangman.game_state).to eq('Won')
+			expect(hangman.game_over).to eq(true)
+		end
+
+
 	end
 
 end
