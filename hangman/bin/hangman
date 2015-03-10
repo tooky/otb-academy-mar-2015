@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+
+require_relative '../lib/hangman.rb'
+
+print 'Enter hidden word: '
+hidden_word = STDIN.gets.chomp
+
+hangman = Hangman.new(hidden_word)
+
+while(hangman.lives > 0)
+
+	print 'Enter guess: '
+	guess = STDIN.gets.chomp
+	hangman.make_guess(guess)
+	puts hangman.word
+	puts "Lives remaining: #{hangman.lives}"
+
+end
