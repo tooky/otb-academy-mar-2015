@@ -15,7 +15,11 @@ end
 
 get '/guess' do
 	@hangman = session[:hangman]
-	erb :guess
+	if @hangman.game_over
+		redirect '/gameover'
+	else
+		erb :guess
+	end
 end
 
 post '/guess' do
@@ -23,4 +27,10 @@ post '/guess' do
 	guess = params[:guess]
 	hangman.make_guess(guess)
 	redirect '/guess'
+end
+
+get '/gameover' do
+	hangman = session[:hangman]
+	session[:hangman] = nil
+	"Game over\n You #{hangman.game_state}"
 end
