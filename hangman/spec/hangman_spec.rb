@@ -6,7 +6,7 @@ class Hangman
 	end
 
 	def make_guess(guess)
-		@guesses << guess
+		@guesses << guess.downcase
 	end
 
 	def lives
@@ -69,6 +69,22 @@ RSpec.describe 'Hangman' do
 		end
 
 		it 'should show the correct guess' do
+			expect(hangman.word).to eq('p__p')
+		end
+
+		it 'should accept any case char' do
+			expect(hangman.word).to eq('p__p')
+		end
+
+	end
+
+	context 'upcase guesses' do
+		
+		before do
+			hangman.make_guess('P')
+		end
+
+		it 'should return downcase' do
 			expect(hangman.word).to eq('p__p')
 		end
 
