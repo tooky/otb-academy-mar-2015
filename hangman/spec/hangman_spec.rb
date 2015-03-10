@@ -1,23 +1,30 @@
 class Hangman
 
-	attr_reader :lives, :word
-
 	def initialize(hidden_word)
-		@lives = 10
 		@hidden_word = hidden_word
-		@word = '____'
+		@guesses = []
 	end
 
 	def make_guess(guess)
-		if @hidden_word.include?(guess)
-			@word = 'p___'
-		else
-			@lives -= 1
+		@guesses << guess
+	end
+
+	def lives
+		@guesses.reduce(10) do |lives,guess|
+			unless @hidden_word.include?(guess)
+				lives -= 1
+			end
+			lives
 		end
 	end
 
-end
+	def word
+		@hidden_word.each_char.map do |char|
+			@guesses.include?(char) ? char : '_'
+		end.join
+	end
 
+end
 
 RSpec.describe 'Hangman' do
 
@@ -62,7 +69,7 @@ RSpec.describe 'Hangman' do
 		end
 
 		it 'should show the correct guess' do
-			expect(hangman.word).to eq('p___')
+			expect(hangman.word).to eq('p__p')
 		end
 
 	end
@@ -83,6 +90,24 @@ RSpec.describe 'Hangman' do
 			expect(hangman.word).to eq('____')
 		end
 
+	end
+
+	context 'when a player guesses "plop"' do
+
+		before do
+			hangman.make_guess('p')
+			hangman.make_guess('l')
+			hangman.make_guess('o')
+			hangman.make_guess('p')
+		end
+
+		it 'should return 10 lives' do
+			expect(hangman.lives).to eq(10)
+		end
+
+		it 'should show whole word' do
+			expect(hangman.word).to eq('plop')
+		end
 	end
 
 end
