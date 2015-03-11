@@ -1,6 +1,24 @@
 class Game
+  def initialize
+    @frame = 0
+    @index = 0
+  end
+
   def score(line)
-    line.reduce(0) { |s,v| s + v }
+    score = 0
+    while @frame < 10
+      if line[@index] + line[@index + 1] == 10 # a spare
+        score += 10 + line[@index + 2]
+        @frame += 1
+        @index += 2
+      else # a normal frame
+        score += line[@index] + line[@index + 1]
+        @frame += 1
+        @index += 2
+      end
+    end
+    return score
+
   end
 end
 
