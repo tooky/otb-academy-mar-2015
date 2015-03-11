@@ -10,17 +10,16 @@ class Game
     while @frame < 10
       if spare?
         score += 10 + spare_bonus
-        @frame += 1
         @index += 2
       elsif strike?
         score += 10 + strike_bonus
-        @frame += 1
         @index += 1
       else # a normal frame
         score += normal_frame_score
-        @frame += 1
         @index += 2
       end
+
+      @frame += 1
     end
     return score
   end
