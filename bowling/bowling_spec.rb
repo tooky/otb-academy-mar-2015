@@ -17,7 +17,7 @@ class Game
         @frame += 1
         @index += 1
       else # a normal frame
-        score += @line[@index] + @line[@index + 1]
+        score += normal_frame_score
         @frame += 1
         @index += 2
       end
@@ -39,6 +39,10 @@ class Game
 
   def strike_bonus
     @line[@index + 1] + @line[@index + 2]
+  end
+
+  def normal_frame_score
+    @line[@index] + @line[@index + 1]
   end
 end
 
