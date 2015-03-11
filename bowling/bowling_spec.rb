@@ -11,6 +11,10 @@ class Game
         score += 10 + line[@index + 2]
         @frame += 1
         @index += 2
+      elsif line[@index] == 10 # a strike
+        score += 10 + line[@index + 1] + line[@index + 2]
+        @frame += 1
+        @index += 1
       else # a normal frame
         score += line[@index] + line[@index + 1]
         @frame += 1
