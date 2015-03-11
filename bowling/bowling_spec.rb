@@ -1,12 +1,11 @@
 class Game
-  def initialize
-    @frame = 0
-    @index = 0
-  end
 
   def score(line)
+    @frame = 0
+    @index = 0
     @line = line
     score = 0
+
     while @frame < 10
       if spare?
         score += 10 + spare_bonus
@@ -18,7 +17,6 @@ class Game
         score += normal_frame_score
         @index += 2
       end
-
       @frame += 1
     end
     return score
