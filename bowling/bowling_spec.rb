@@ -12,7 +12,7 @@ class Game
         score += 10 + @line[@index + 2]
         @frame += 1
         @index += 2
-      elsif @line[@index] == 10 # a strike
+      elsif strike?
         score += 10 + @line[@index + 1] + @line[@index + 2]
         @frame += 1
         @index += 1
@@ -27,6 +27,10 @@ class Game
 
   def spare?
     @line[@index] + @line[@index + 1] == 10
+  end
+
+  def strike?
+    @line[@index] == 10
   end
 end
 
