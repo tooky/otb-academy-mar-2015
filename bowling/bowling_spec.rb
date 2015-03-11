@@ -70,4 +70,10 @@ RSpec.describe "A game of bowling" do
 
     expect( game.score(line) ).to eq(300)
   end
+
+  it "normal game" do
+    line = [1,2,5,5,7,0,10,4,3,6,2,3,7,2,1,4,1,8,0]
+
+    expect( game.score(line) ).to eq(87)
+  end
 end
