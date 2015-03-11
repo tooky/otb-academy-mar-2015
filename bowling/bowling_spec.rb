@@ -9,7 +9,7 @@ class Game
     score = 0
     while @frame < 10
       if spare?
-        score += 10 + @line[@index + 2]
+        score += 10 + spare_bonus
         @frame += 1
         @index += 2
       elsif strike?
@@ -31,6 +31,10 @@ class Game
 
   def strike?
     @line[@index] == 10
+  end
+
+  def spare_bonus
+    @line[@index + 2]
   end
 end
 
