@@ -14,4 +14,10 @@ RSpec.describe "A game of bowling" do
     expect( game.score(line) ).to eq(0)
   end
 
+  it "All Singles" do
+    line = Array.new(20, 1)
+
+    expect( game.score(line) ).to eq(20)
+  end
+
 end
