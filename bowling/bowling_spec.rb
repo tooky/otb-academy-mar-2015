@@ -5,24 +5,28 @@ class Game
   end
 
   def score(line)
+    @line = line
     score = 0
     while @frame < 10
-      if line[@index] + line[@index + 1] == 10 # a spare
-        score += 10 + line[@index + 2]
+      if spare?
+        score += 10 + @line[@index + 2]
         @frame += 1
         @index += 2
-      elsif line[@index] == 10 # a strike
-        score += 10 + line[@index + 1] + line[@index + 2]
+      elsif @line[@index] == 10 # a strike
+        score += 10 + @line[@index + 1] + @line[@index + 2]
         @frame += 1
         @index += 1
       else # a normal frame
-        score += line[@index] + line[@index + 1]
+        score += @line[@index] + @line[@index + 1]
         @frame += 1
         @index += 2
       end
     end
     return score
+  end
 
+  def spare?
+    @line[@index] + @line[@index + 1] == 10
   end
 end
 
