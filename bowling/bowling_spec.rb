@@ -1,11 +1,17 @@
+class Game
+  def score(line)
+    line.reduce(0) { |s,v| s + v }
+  end
+end
+
 RSpec.describe "A game of bowling" do
 
-  let(:game) { Game.new(line) }
+  let(:game) { Game.new }
 
   it "worst... game.. evar" do
     line = Array.new(20, 0)
 
-    expect( game.score ).to eq(0)
+    expect( game.score(line) ).to eq(0)
   end
 
 end
