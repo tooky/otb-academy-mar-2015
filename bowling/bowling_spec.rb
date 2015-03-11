@@ -13,7 +13,7 @@ class Game
         @frame += 1
         @index += 2
       elsif strike?
-        score += 10 + @line[@index + 1] + @line[@index + 2]
+        score += 10 + strike_bonus
         @frame += 1
         @index += 1
       else # a normal frame
@@ -35,6 +35,10 @@ class Game
 
   def spare_bonus
     @line[@index + 2]
+  end
+
+  def strike_bonus
+    @line[@index + 1] + @line[@index + 2]
   end
 end
 
