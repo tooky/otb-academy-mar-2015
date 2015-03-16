@@ -20,11 +20,14 @@ Given(/^Chris is at "(.*?)"$/) do |location|
 end
 
 When(/^Chris shouts "(.*?)"$/) do |message|
-  @chris.shout(message)
+  @the_shout = message
+  @chris.shout(@the_shout)
 end
 
 Then(/^James doesn't hear Chris' shout$/) do
-  unless @james.heard_messages.empty?
-    fail "James heard the message"
-  end
+  expect(@james.heard_messages).to be_empty
+end
+
+Then(/^James hears Chris' shout$/) do
+  expect(@james.heard_messages).to include(@the_shout)
 end

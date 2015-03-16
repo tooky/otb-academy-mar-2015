@@ -9,3 +9,9 @@ Feature: Hear a shout
     And Chris is at "On the Beach"
     When Chris shouts "Donuts in the breakout area"
     Then James doesn't hear Chris' shout
+
+  Scenario: James hears Chris' shout
+    Given James is at "Morrisons Cheadle"
+    And Chris is at "On the Beach"
+    When Chris shouts "Donuts in the breakout area"
+    Then James hears Chris' shout
