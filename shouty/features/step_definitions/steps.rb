@@ -1,21 +1,44 @@
 class Person
   attr_writer :location
+  attr_reader :heard_messages
 
-  def shout(message)
+  def initialize(network)
+    @network = network
+    @network.subscribe(self)
+    @heard_messages = []
   end
 
-  def heard_messages
-    []
+  def shout(message)
+    @network.broadcast(message)
+  end
+
+  def hear(message)
+    @heard_messages << message
+  end
+end
+
+class Network
+  def initialize
+    @people = []
+  end
+
+  def subscribe(person)
+    @people << person
+  end
+
+  def broadcast(message)
+    @people.each { |person| person.hear(message) }
   end
 end
 
 Given(/^James is at "(.*?)"$/) do |location|
-  @james = Person.new
+  @network ||= Network.new
+  @james = Person.new(@network)
   @james.location = location
 end
 
 Given(/^Chris is at "(.*?)"$/) do |location|
-  @chris = Person.new
+  @chris = Person.new(@network)
   @chris.location = location
 end
 
