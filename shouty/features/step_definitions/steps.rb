@@ -31,14 +31,20 @@ class Network
   end
 end
 
+module ShoutyDomain
+  def the_network
+    @the_network ||= Network.new
+  end
+end
+World(ShoutyDomain)
+
 Given(/^James is at "(.*?)"$/) do |location|
-  @network ||= Network.new
-  @james = Person.new(@network)
+  @james = Person.new(the_network)
   @james.location = location
 end
 
 Given(/^Chris is at "(.*?)"$/) do |location|
-  @chris = Person.new(@network)
+  @chris = Person.new(the_network)
   @chris.location = location
 end
 
