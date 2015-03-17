@@ -8,9 +8,9 @@ describe Person do
       @network = Network.new
       @chris = Person.new(@network)
       # Chris is at On the Beach
-      @chris.location = [53.3934580,-2.1860490]
+      @chris.location = Location.new(53.3934580,-2.1860490)
       # Other location is morrisons
-      other_location = [53.4004700, -2.1916600]
+      other_location = Location.new(53.4004700, -2.1916600)
 
       expect(@chris.within_range?(other_location)).to eq(true)
     end
@@ -19,9 +19,9 @@ describe Person do
       # Chris is is at On the beach
       @network = Network.new
       @chris = Person.new(@network)
-      @chris.location = [53.3934580,-2.2309100]
+      @chris.location = Location.new(53.3934580,-2.2309100)
       # Other location is morrisons"
-      other_location = [53.4773800, -2.1916600]
+      other_location = Location.new(53.4773800, -2.1916600)
 
       expect(@chris.within_range?(other_location)).to eq(false)
     end
