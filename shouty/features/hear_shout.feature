@@ -8,9 +8,11 @@ Feature: Hear a shout
     - Should a shouter hear their own message?
 
   Background:
-    Given "Manchester Picadilly" is at "53.4773800,-2.2309100"
-    And "On the Beach" is at "53.3934580,-2.1860940"
-    And "Morrisons Cheadle" is at "53.4004700,-2.1916600"
+    Given the following geolocations:
+      | Place                | Latitude   | Longitude  |
+      | Manchester Picadilly | 53.4773800 | -2.2309100 |
+      | On the Beach         | 53.3934580 | -2.1860940 |
+      | Morrisons Cheadle    | 53.4004700 | -2.1916600 |
 
   Scenario: James is out of range
     Given James is at "Manchester Picadilly"
