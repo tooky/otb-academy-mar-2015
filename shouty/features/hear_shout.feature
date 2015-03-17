@@ -18,13 +18,13 @@ Feature: Hear a shout
     Given James is at "Manchester Picadilly"
     And Chris is at "On the Beach"
     When Chris shouts "Donuts in the breakout area"
-    Then James doesn't hear Chris' shout
+    Then James doesn't hear the shout
 
   Scenario: James is in range
     Given James is at "Morrisons Cheadle"
     And Chris is at "On the Beach"
     When Chris shouts "Donuts in the breakout area"
-    Then James hears Chris' shout
+    Then James hears the shout
 
   Scenario: James' shout is too long
     Given James is at "Morrisons Cheadle"
@@ -35,4 +35,4 @@ Feature: Hear a shout
       characters. The longer I make the text the harder it is to
       decide when to stop. Not yet. A little more.
       """
-    Then James doesn't hear Chris' shout
+    Then James doesn't hear the shout
