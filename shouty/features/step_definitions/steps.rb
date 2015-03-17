@@ -5,10 +5,14 @@ module ShoutyDomain
 end
 World(ShoutyDomain)
 
-Given(/^"(.*?)" is at "(.*?)"$/) do |location, lat_long|
-  location_array = lat_long.split(",").map { |s| s.to_f }
+Given(/^the following geolocations:$/) do |locations|
   @locations ||= {}
-  @locations[location] = Location.new(location_array[0],location_array[1])
+  locations.hashes.each do |location|
+    place = location["Place"]
+    lat = location["Latitude"]
+    long = location["Longitude"]
+    @locations[place] = Location.new(Float(lat), Float(long))
+  end
 end
 
 Given(/^James is at "(.*?)"$/) do |location|
