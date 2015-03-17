@@ -53,8 +53,9 @@ class Location
 end
 
 class Network
-  def initialize
+  def initialize(max_length: 140)
     @people = []
+    @max_length = max_length
   end
 
   def subscribe(person)
@@ -62,8 +63,13 @@ class Network
   end
 
   def broadcast(message, location)
+    return if message_too_long?(message)
     @people.each do |person|
       person.hear(message) if person.within_range?(location)
     end
+  end
+
+  def message_too_long?(message)
+    message.length > @max_length
   end
 end
