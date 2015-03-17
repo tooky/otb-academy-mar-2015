@@ -7,7 +7,7 @@ World(ShoutyDomain)
 
 Given(/^"(.*?)" is at "(.*?)"$/) do |location, lat_long|
   @locations ||= {}
-  @locations[location] = lat_long.split(",")
+  @locations[location] = lat_long.split(",").map { |s| s.to_f }
 end
 
 Given(/^James is at "(.*?)"$/) do |location|
