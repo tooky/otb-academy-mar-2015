@@ -23,3 +23,14 @@ Feature: Hear a shout
     And Chris is at "On the Beach"
     When Chris shouts "Donuts in the breakout area"
     Then James hears Chris' shout
+
+  Scenario: James' shout is too long
+    Given James is at "Morrisons Cheadle"
+    And Chris is at "On the Beach"
+    When Chris shouts:
+      """
+      This shout is very long, far more than the allowed 140
+      characters. The longer I make the text the harder it is to
+      decide when to stop. Not yet. A little more.
+      """
+    Then James doesn't hear Chris' shout
