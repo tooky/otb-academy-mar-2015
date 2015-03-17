@@ -5,14 +5,19 @@ module ShoutyDomain
 end
 World(ShoutyDomain)
 
+Given(/^"(.*?)" is at "(.*?)"$/) do |location, lat_long|
+  @locations ||= {}
+  @locations[location] = lat_long.split(",")
+end
+
 Given(/^James is at "(.*?)"$/) do |location|
   @james = Person.new(the_network)
-  @james.location = location
+  @james.location = @locations[location]
 end
 
 Given(/^Chris is at "(.*?)"$/) do |location|
   @chris = Person.new(the_network)
-  @chris.location = location
+  @chris.location = @locations[location]
 end
 
 When(/^Chris shouts "(.*?)"$/) do |message|

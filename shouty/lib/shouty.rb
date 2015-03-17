@@ -9,11 +9,14 @@ class Person
   end
 
   def shout(message)
-    @network.broadcast(message)
+    @network.broadcast(message, @location)
   end
 
   def hear(message)
     @heard_messages << message
+  end
+
+  def within_range?(other_location)
   end
 end
 
@@ -26,7 +29,9 @@ class Network
     @people << person
   end
 
-  def broadcast(message)
-    @people.each { |person| person.hear(message) }
+  def broadcast(message, location)
+    @people.each do |person|
+      person.hear(message) if person.within_range?(location)
+    end
   end
 end
