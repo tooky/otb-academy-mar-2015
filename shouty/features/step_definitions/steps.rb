@@ -48,7 +48,7 @@ When(/^Chris shouts "(.*?)"$/) do |message|
 end
 
 Then(/^James doesn't hear Chris' shout$/) do
-  expect(@james.heard_messages).to be_empty
+  expect(@james.heard_messages).not_to include(@the_shout)
 end
 
 Then(/^James hears Chris' shout$/) do
