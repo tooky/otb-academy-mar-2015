@@ -5,9 +5,13 @@ module ShoutyDomain
 end
 World(ShoutyDomain)
 
-Given(/^the following geolocations:$/) do |locations|
-  @locations ||= {}
-  locations.hashes.each do |location|
+Before do
+  @locations = {}
+  @people = {}
+end
+
+Given(/^the following geolocations:$/) do |location_data|
+  location_data.hashes.each do |location|
     place = location["Place"]
     lat = location["Latitude"]
     long = location["Longitude"]
@@ -16,7 +20,6 @@ Given(/^the following geolocations:$/) do |locations|
 end
 
 Given(/^(\w+) is at "(.*?)"$/) do |name, location|
-  @people ||= {}
   @people[name] = Person.new(the_network)
   @people[name].location = @locations[location]
 end
