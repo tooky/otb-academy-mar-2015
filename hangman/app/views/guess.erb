@@ -1,0 +1,6 @@
+<p>Current State: <%= @hangman.word %></p>
+<form action="/guess" method="post">
+	<label id="guess">Enter guess</label>
+	<input name="guess" type="text" />
+	<input name="Submit" type="submit" value="submit" />
+</form>
